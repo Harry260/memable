@@ -1,5 +1,6 @@
 import cardActions from "./cards";
 import GridAction from "./grid";
+import axios from "axios";
 
 var apiTimeOut;
 function fillCards(config = {}, type = "swipe") {
@@ -31,16 +32,16 @@ function fillCards(config = {}, type = "swipe") {
 	var lastIDs =
 		config.lastIDs || JSON.parse(localStorage.lastSubreddit || "{}") || {};
 
-	var baseUrl = "https://memable.vercel.app/";
+	var baseUrl = location.href;
 
 	tempSubreddits.forEach((subreddit) => {
 		var lastID = lastIDs[subreddit] || false;
 
-		// if (lastID) {
-		// 	subreddits.push(`${subreddit}:${lastID}`);
-		// } else {
-		subreddits.push(subreddit);
-		// }
+		if (lastID) {
+			subreddits.push(`${subreddit}:${lastID}`);
+		} else {
+			subreddits.push(subreddit);
+		}
 	});
 
 	const sp = new URLSearchParams({
@@ -66,71 +67,61 @@ function fillCards(config = {}, type = "swipe") {
 		"\n\n" + endpoint + `\n\n ---- END OF ENDPOINT ---- \n\n`
 	);
 
-	fetch(endpoint, {
-		method: "GET", // or 'PUT'
-		headers: {
-			"Content-Type": "application/json",
-		},
-	})
-		.then((response) => response.json())
-		.then((response) => {
-			clearTimeout(apiTimeOut);
-			window.loading = false;
+	axios.get(endpoint).then((response) => {
+		clearTimeout(apiTimeOut);
+		window.loading = false;
 
-			window.FirstTime = false;
-			var result = response.data;
-			var subreddits = result.properties.subreddits;
-			var allMemes = [];
+		window.FirstTime = false;
+		var result = response.data;
+		var subreddits = result.properties.subreddits;
+		var allMemes = [];
 
-			for (const key in result.data) {
-				if (result.data[key] === []) {
-					delete result.data[key];
-				}
+		for (const key in result.data) {
+			if (result.data[key] === []) {
+				delete result.data[key];
 			}
+		}
 
-			subreddits.forEach((subreddit) => {
-				var tempSubReddit = result.data[subreddit] ?? [];
+		subreddits.forEach((subreddit) => {
+			var tempSubReddit = result.data[subreddit] ?? [];
 
-				if (tempSubReddit.length !== 0) {
-					tempSubReddit = result.data[subreddit];
+			if (tempSubReddit.length !== 0) {
+				tempSubReddit = result.data[subreddit];
 
-					var lastId = tempSubReddit.at(-1).id;
+				var lastId = tempSubReddit.at(-1).id;
 
-					cardActions.setLastCard(subreddit, "t3_" + lastId);
+				cardActions.setLastCard(subreddit, "t3_" + lastId);
 
-					tempSubReddit.forEach((meme) => {
-						allMemes.push(meme);
-					});
-				}
-			});
-
-			//console.log(allMemes);
-			if (type === "swipe") {
-				if (allMemes.length === 0) {
-					cardActions.ChangeLoadMessage({
-						description:
-							"Aw snap! Mr.Memebribble couldn't bribe any memes from meme-police.",
-						title: "No memes found!",
-						image: "../assets/icons/restart.svg",
-						btn: {
-							text: "Start over",
-							do: () => {
-								localStorage.removeItem("lastSubreddit");
-								window.location.reload;
-							},
-						},
-					});
-				} else {
-					cardActions.add(allMemes);
-				}
+				tempSubReddit.forEach((meme) => {
+					allMemes.push(meme);
+				});
 			}
-			if (type === "grid") {
-				GridAction.add(allMemes);
-			}
-		})
-		.catch((error) => {
-			console.error("Error:", error);
 		});
+
+		//console.log(allMemes);
+		if (type === "swipe") {
+			if (allMemes.length === 0) {
+				cardActions.ChangeLoadMessage({
+					description:
+						"Aw snap! Mr.Memebribble couldn't bribe any memes from meme-police.",
+					title: "No memes found!",
+					image: "../assets/icons/restart.svg",
+					btn: {
+						text: "Start over",
+						do: () => {
+							localStorage.removeItem("lastSubreddit");
+							window.location.reload;
+						},
+					},
+				});
+			} else {
+				cardActions.add(allMemes);
+			}
+		}
+		if (type === "grid") {
+			GridAction.add(allMemes);
+		}
+	});
 
 	// .catch(function (error) {
 	// 	console.log(error);
