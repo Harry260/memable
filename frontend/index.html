@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Memable - Home of quality memes! OwO</title>
+		<link rel="stylesheet" href="./src/css/style.css" type="text/css" />
+		<link rel="icon" type="image/x-icon" href="./assets/images/icon.png" />
+	</head>
+	<body>
+		<div class="header-div center">
+			<div class="header-inner v-center">
+				<div class="header-icon-wrap v-center">
+					<div class="header-icon">
+						<img src="./assets/icons/icon.svg" alt="" />
+					</div>
+					<h1 class="header-text">Memable</h1>
+				</div>
+				<div class="header-buttons center">
+					<div class="header-button center">
+						<i class="bi-heart"></i>
+						<h2>Bookmarks</h2>
+					</div>
+					<div class="header-button settings-button icon-only center">
+						<i class="bi-gear-wide"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="panel-left">
+			<div class="panel-inner">
+				<div class="icon-btn center bookmark__btn">
+					<i class="bi-heart-fill icon-btn__icon"></i>
+				</div>
+				<div class="icon-btn center open-reddit">
+					<i class="bi-chat-square-text-fill icon-btn__icon"></i>
+				</div>
+				<div class="icon-btn center">
+					<i class="bi-gift-fill icon-btn__icon"></i>
+				</div>
+				<div class="icon-btn user-icon-left center">
+					<img
+						class="button-user-icon"
+						src="./assets/images/lodaing.gif"
+					/>
+				</div>
+			</div>
+		</div>
+
+		<div class="swipe-root" style="display: none">
+			<div class="root">
+				<div class="meme center">
+					<div class="load--card center">
+						<div class="load--text">
+							<img
+								src="./assets/images/lodaing.gif"
+								class="loader-img"
+							/>
+							<h1 class="loader-title">Bribing for memes</h1>
+							<p class="loader-message">
+								This might take few seconds! Cuz bribing is
+								risky ewww!
+							</p>
+
+							<button class="loader-btn">Start Over</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="loader-overlay center">
+			<div class="loader-img"></div>
+		</div>
+
+		<div class="grid-root" style="display: none">
+			<div class="grid-container"></div>
+		</div>
+		<div class="setting-pop">
+			<div class="setting-triangle"></div>
+
+			<div class="settings-content">
+				<div class="settings-item">
+					<header>
+						<h1>Choose Layout</h1>
+					</header>
+					<div class="radio-toolbar">
+						<input
+							type="radio"
+							id="radioSwipe"
+							name="radioLayout"
+							value="swipe"
+						/>
+						<label
+							for="radioSwipe"
+							onclick="localStorage.setItem('layout', 'swipe')"
+						>
+							<img src="./assets/icons/swipe.svg" alt="" />
+						</label>
+
+						<input
+							type="radio"
+							id="radioGrid"
+							name="radioLayout"
+							value="grid"
+						/>
+						<label
+							for="radioGrid"
+							onclick="localStorage.setItem('layout', 'grid')"
+							><img src="./assets/icons/grid.svg" alt=""
+						/></label>
+					</div>
+				</div>
+				<div class="settings-item">
+					<header>
+						<h1>Category</h1>
+					</header>
+					<div class="radio-toolbar">
+						<input
+							type="radio"
+							id="radioHot"
+							name="radioCat"
+							value="hot"
+						/>
+						<label for="radioHot">
+							<i class="bi-stars"></i> Hot</label
+						>
+
+						<input
+							type="radio"
+							id="radioNew"
+							name="radioCat"
+							value="new"
+						/>
+						<label for="radioNew">
+							<i class="bi-star-fill"></i> New</label
+						>
+						<input
+							type="radio"
+							id="radioTop"
+							name="radioCat"
+							value="top"
+						/>
+						<label for="radioTop">
+							<i class="bi-arrow-up-circle"></i> Top</label
+						>
+					</div>
+				</div>
+				<div class="settings-item">
+					<header>
+						<h1>Explict content</h1>
+					</header>
+					<div class="radio-toolbar">
+						<input
+							type="radio"
+							id="radioNSFW"
+							name="radioExplict"
+							value="on"
+						/>
+						<label for="radioNSFW">
+							<i class="bi-x-circle"></i>On</label
+						>
+
+						<input
+							type="radio"
+							id="radioSFW"
+							name="radioExplict"
+							value="off"
+						/>
+						<label for="radioSFW">
+							<i class="bi-check-circle"></i> Off</label
+						>
+
+						<input
+							type="radio"
+							id="radioMask"
+							name="radioExplict"
+							value="mask"
+						/>
+						<label for="radioMask">
+							<i class="bi-mask"></i> Mask</label
+						>
+					</div>
+				</div>
+				<div class="settings-item">
+					<header>
+						<h1>Subreddits</h1>
+					</header>
+					<button class="btn-tlbr choose-subreddits">
+						Choose Subreddits
+					</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="./dist/main.js"></script>
+</html>

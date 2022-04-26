@@ -1,0 +1,138 @@
+.grid-img {
+   max-width: 100%;
+   display: block;
+   transition: transform 0.15s ease-in-out 0s;
+   z-index: -1;
+}
+
+.grid-item{
+   box-shadow: inset 0 0 20px 10px rgba(0, 0, 0, 0.267);
+   overflow: hidden;
+   border-radius: 10px;
+   cursor: pointer;
+   position: relative;
+}
+ 
+.grid-item-wrap  {
+   margin: 0;
+   display: grid;
+   grid-template-rows: 1fr auto;
+   margin-bottom: 30px;
+   break-inside: avoid;
+   position: relative;
+   background:linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+   border-radius: 12px;
+}
+ 
+.grid-item > img {
+   grid-row: 1 / -1;
+   grid-column: 1;
+}
+
+.grid-img-spoiler-true{
+   filter: blur(10px);
+}
+
+.grid-img-spoiler-false{
+   filter: blur(0px);
+}
+
+.grid-item:hover > img {
+   filter: blur(0px);
+}
+
+.grid-item:hover .grid-img{
+   transition: transform 0.15s ease-in-out 0s;
+   transform: scale(1.1);
+}
+
+.grid-root{
+   width: 100%;
+}
+
+.grid-container {
+   column-count:4;
+   column-gap: 30px;
+   width: 80%;
+   margin: 0 auto;
+   min-height: 100vh;
+   padding: 50px;
+   padding-top: 100px;
+}
+
+.item-title{
+   position: absolute;
+   top: -5000000px;
+   padding: 20px;
+   z-index: 2;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+           line-clamp: 2; 
+   -webkit-box-orient: vertical;
+}
+
+.item-title h1{
+   font-size: 15px;
+   line-height: 18px;
+   font-family: poppins;
+   color: #f1efef;
+}
+
+.user-info{
+   bottom: 10px;
+   transition: 0.4s;
+}
+
+.user-info{
+   display: flex;
+   padding: 10px 0;
+   transition: 0.4s;
+   position: absolute;
+   background-color: #1e293b00;
+   bottom: 15px;
+   left: 15px;
+}
+.user-info::after{
+   backdrop-filter: blur(10px);
+}
+
+.grid-item .user-icon img{
+   background: rgba(255, 255, 255, 0.178)!important;
+   backdrop-filter: blur(10px);
+}
+
+
+.grid-item::after {
+   content: '';
+   position: absolute;
+   display: none;
+   top: 0;
+   left: 0;
+   right: 0;
+   height: 300px;
+   background: linear-gradient(180deg, rgba(0,0,0,0),#00000083);
+   pointer-events: none;
+   z-index: 1;
+   transform: rotate(180deg);
+}
+
+
+.grid-item:hover:after{
+   display: block !important;
+}
+
+.grid-item:hover .item-title{
+   top: 0px;
+}
+
+.grid-item-loader{
+   background-color: #1e293bce;
+   border-radius: 10px;
+   padding: 30px;
+}
+
+.grid-item-loader .loader-message {
+   width: 100% !important;
+}

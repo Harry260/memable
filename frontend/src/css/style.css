@@ -1,0 +1,472 @@
+@import "./app.ui.css";
+@import "./fonts.css";
+@import "./grid.css";
+@import "./radio-toolbar.css";
+
+@import "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css";
+
+:root{
+   --primary: #121212;
+   --secondary: #1f1f20;
+   --tertiary: #ffffff0d;
+   --header: rgba(18, 18, 18, 0.7);
+
+   --primary: #111827;
+   --secondary: #1e293b;
+   --tertiary: #1e293b;
+   --header: rgba(11, 18, 32, 0.75);
+}
+
+
+
+
+body,.root{
+   background-color: var(--primary);
+   height: 100vh;
+   transition: 0.4s !important;
+   font-family: poppins;
+   overflow-x: hidden;
+}
+
+
+.meme{
+   width: 100%;
+   height: 100%;
+   background-image: url(../../assets/images/bg.avif);
+   background-size: cover;
+}
+
+.swipe-root{
+   overflow: hidden;
+   width: 100%;
+}
+
+.meme:after {
+   content: '';
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   height: 300px;
+   background: linear-gradient(180deg, rgba(0,0,0,0),#7928CA33);
+   pointer-events: none;
+   z-index: 1;
+}
+
+
+.meme--card, .load--card{
+   width: 500px;
+   height: 500px;
+   background-color: var(--secondary);
+   border-radius: 20px;
+   position: absolute;
+   overflow: hidden;
+   display: flex;
+   justify-content: center;
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+   z-index: 2;
+}
+
+.meme--card:first-child, .meme--card:nth-child(2), .setting-pop{
+   box-shadow:
+   0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+   0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+   0 12.5px 10px rgba(0, 0, 0, 0.06),
+   0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+   0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+   0 100px 80px rgba(0, 0, 0, 0.12)
+}
+
+*, *:before, *:after {
+   box-sizing: border-box;
+   padding: 0;
+   margin: 0;
+}
+
+
+.loaded.meme {
+   opacity: 1;
+}
+
+
+.moving.meme--card {
+   cursor: -webkit-grabbing;
+   cursor: -moz-grabbing;
+   cursor: grabbing;
+}
+ 
+.meme--card:hover .meme-status{
+   bottom: 0;
+}
+
+.meme-status{
+   position: absolute;
+   bottom: -100px;
+   left: 0;
+   width: 100%;
+   padding: 20px;
+   transition: .4s;
+}
+
+.user-information{
+   display: flex;
+   background:rgba(18, 18, 18, 0.7);
+   padding: 10px 15px;
+   border-radius: 10px;
+   backdrop-filter: blur(20px);
+}
+
+.user-icon{
+   --icon-size: 25px;
+   width: var(--icon-size);
+   height: var(--icon-size);
+   overflow: hidden;
+   border-radius: 50%;
+   margin-right: 10px;
+}
+
+.user-icon img{
+   width: 100%;
+   height: 100%;
+   background: #f09433; 
+}
+
+.user-name h4{
+   font-size: 12px;
+   font-weight: 600;
+   font-family: ag-r;
+   letter-spacing: 1px;
+   line-break: no-wrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   margin-right: 8px;
+   white-space: nowrap;
+
+   background: linear-gradient(126.49deg, rgb(0, 163, 255) 0%, rgb(0, 102, 255) 100%);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+}
+
+.user-name h6{
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 1; /* number of lines to show */
+           line-clamp: 1; 
+   -webkit-box-orient: vertical;
+   color: #EAEAEA;
+   font-size: 10;
+   font-weight: 500;
+}
+
+.reddit-icon{
+   opacity: 0.5;
+}
+
+.reddit-icon img{
+   width: 20px;
+   margin-left: 10px;
+}
+
+.reddit-icon:hover{
+   opacity: 0.6;
+   cursor: pointer;
+   filter: grayscale(0%);
+}
+
+.meme--card__image{
+   height: 100%;
+   pointer-events: none;
+   position: absolute;
+}
+
+.__backdrop{
+   width: 100%;
+   height: 100%;
+   z-index: -1;
+   filter: blur(20px);
+   background-size: cover;
+   background-position: center;
+}
+
+.card-drag-overlay{
+   height: 100%;
+   width: 100%;
+   position: absolute;
+   background-color: #f09433;
+}
+
+.panel-left{
+   position: fixed;
+   left: 0;
+   top: 0;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   z-index: 5;
+}
+
+.panel-inner{
+   border-radius: 10px;
+   box-shadow:  18px 18px 70px #060a12, -18px -18px 70px #1a2a46; 
+   width: 50px;
+   background-color: var(--tertiary);
+   margin-left: 30px;
+   overflow: hidden;
+   padding: 5px;
+}
+
+.panel-inner .icon-btn{
+   padding: 6px;
+   color: #9ca3af;
+   cursor: pointer;
+   transition: 0.2s;
+   border-radius: 10px;
+}
+
+.panel-inner .icon-btn i {
+   -webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+   font-size: 20px;
+}
+
+.panel-inner .icon-btn:hover{
+   background-color: #334155;
+   padding: 10px;
+}
+
+.panel-inner .icon-btn:hover .icon-btn__icon{
+   transition: 0.2s;
+   transform: scale(1.2);
+}
+
+.panel-inner .icon-btn:nth-child(1) i{
+   -webkit-background-clip: none;
+	-webkit-text-fill-color: #9ca3af;
+}
+
+.red-icon-active{
+   -webkit-background-clip: none;
+   -webkit-text-fill-color: transparent !important;
+   background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+}
+
+.panel-inner .icon-btn:nth-child(2) i{
+   background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+}
+.panel-inner .icon-btn:nth-child(3) i{
+   background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+   
+}
+
+.button-user-icon{
+   width: 100%;
+   border-radius: 10px;
+}
+
+.load--card{
+   background-color: #060a1283;
+   backdrop-filter: blur(20px);
+   box-shadow:
+   0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+   0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+   0 12.5px 10px rgba(0, 0, 0, 0.06),
+   0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+   0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+   0 100px 80px rgba(0, 0, 0, 0.12)
+}
+
+.loader-img{
+   width: 60px;
+   height: 60px;
+   margin-bottom: 10px;
+}
+
+.load--text{
+   text-align: center;
+}
+
+.load--text p{
+   font-size: 12px;
+   font-weight: 400;
+   overflow: hidden;
+   color: #acacac71;
+   width: 70%;
+   margin: 0 auto;
+   margin-top: 12px;
+   line-height: 14px;
+}
+
+.load--text h1{
+   font-size: 20px;
+   font-family: ag-r;
+   color: #eaeaeaad;
+}
+
+.loader-btn{
+   background-color: #0070F3;
+   color: white;
+   font-family: ag-b;
+   padding: 8px 12px;
+   border-radius: 5px;
+   margin-top: 20px;
+   display: none;
+}
+
+.loader-btn:hover{
+   background-color: #0761D1;
+   cursor: pointer;
+}
+
+.new-grid-item{
+   display: none;
+}
+
+
+.header-div{
+   background-color: var(--header);
+   padding: 10px 30px;
+   width: 100%;
+   backdrop-filter: blur(20px);
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 10;
+   border-bottom: 1px solid rgb(248 250 252/.06);
+   z-index: 999;
+}
+
+.header-inner{
+   width: 90%;
+   justify-content: space-between !important;
+}
+
+.header-icon{
+   --icon-size: 35px;
+   background-color: #feda03;
+   width: var(--icon-size);
+   height:  var(--icon-size);
+   border-radius: 8px;
+   cursor: pointer;
+}
+
+.header-icon:hover{
+   transform: scale(0.89);
+}
+
+.header-icon img{
+   width: var(--icon-size);
+   border-radius: 8px;
+}
+
+.header-text{
+   color: rgba(255, 255, 255, 0.911);
+   font-size: 20px;
+   margin-left: 10px;
+   font-weight: 600;
+   letter-spacing: -1px;
+}
+
+.header-button{
+   border: 1px solid rgba(248, 250, 252, 0.123);
+   border-radius: 20px;
+   padding: 0 15px;
+   height: 40px;
+   margin-left: 5px;
+   transition: 0.5s;
+   position: relative;
+}
+
+.header-button:hover{
+   border: 1px solid rgba(248, 251, 252, 0.384);
+   cursor: pointer;
+   transition: 0.5s;
+}
+
+
+.header-button i{
+   color: white;
+}
+
+.header-button h2{
+   color: white;
+   font-size: 12px;
+   margin-left: 10px;
+}
+
+.header-button.icon-only{
+   width: 40px;
+   padding: 0;
+   border-radius: 50%;
+}
+
+.loader-overlay{
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100vh;
+   background-color: #060a12;
+   z-index: 99;
+}
+
+.loader-img{
+   width: 75px;
+   height: 75px;
+   background-image: url(../../assets/images/lodaing.gif);
+   background-size: 100% 100%;
+}
+
+.setting-pop{
+   --settings-bg:  var(--secondary);
+   position: fixed;
+   top: 70px;
+   right: 90px;
+   background-color: var(--settings-bg);
+   backdrop-filter: blur(10px);
+   border-radius: 10px;
+   z-index: 9999;
+   border: 1px solid --header;
+   padding: 10px;
+   top: -500px;
+   transition: 0.4s;
+}
+
+.setting-pop-active{
+   top: 70px !important;
+   transition: 0.4s;
+}
+
+.setting-triangle{
+   position: absolute;
+   top: -10px;
+   right: 20px;
+   width:20px;
+   height: 20px;
+   border-top-left-radius: 5px;
+   background-color: var(--settings-bg);
+   z-index: 99999;
+   transform: rotate(45deg);
+   border-top: 1px solid rgba(248, 250, 252, 0.123);
+   border-left: 1px solid rgba(248, 250, 252, 0.123);
+   display: none;
+}
+
+.settings-item{
+  width: 220px;
+  padding: 10px;
+}
+
+.settings-item header h1{
+   color: rgba(255, 255, 255, 1);
+   font-size:12px;
+   margin-bottom: 10px;
+   font-family: ag-r;
+}
+
+.d100{
+   width: 100%;
+}

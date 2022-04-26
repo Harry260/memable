@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@font-face {
+   font-family: ag-r;
+   src: url(../../assets/fonts/Agrandir-Regular.otf);
+}
+
+@font-face {
+   font-family: ag-b;
+   src: url(../../assets/fonts/Agrandir-TextBold.otf);
+}
