@@ -35,13 +35,13 @@ function fillCards(config = {}, type = "swipe") {
 	var baseUrl = "";
 
 	tempSubreddits.forEach((subreddit) => {
-		var lastID = lastIDs[subreddit] || false;
+		// var lastID = lastIDs[subreddit] || false;
 
-		if (lastID) {
-			subreddits.push(`${subreddit}:${lastID}`);
-		} else {
-			subreddits.push(subreddit);
-		}
+		// if (lastID) {
+		// 	subreddits.push(`${subreddit}:${lastID}`);
+		// } else {
+		subreddits.push(subreddit);
+		// }
 	});
 
 	const sp = new URLSearchParams({
