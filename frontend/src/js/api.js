@@ -32,7 +32,7 @@ function fillCards(config = {}, type = "swipe") {
 	var lastIDs =
 		config.lastIDs || JSON.parse(localStorage.lastSubreddit || "{}") || {};
 
-	var baseUrl = location.href;
+	var baseUrl = "";
 
 	tempSubreddits.forEach((subreddit) => {
 		var lastID = lastIDs[subreddit] || false;
