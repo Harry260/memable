@@ -3,6 +3,7 @@ import getParameterObj from "./lib/utils.js";
 import Memes from "./lib/memes.js";
 import Reddit from "./lib/reddit.js";
 import cors from "cors";
+import axios from "axios";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -42,6 +43,17 @@ app.get(
 	cors()
 );
 
+app.get("/api", (req, res) => {
+	var params = req.query;
+	const qs = Object.keys(params)
+		.map((key) => `${key}=${params[key]}`)
+		.join("&");
+
+	axios.get("https://memable.vercel.app/memes?" + qs).then((response) => {
+		res.status(200).send(response.data);
+	});
+});
+
 app.get("/reddit/u/:user", (req, res) => {
 	if (req.params.user) {
 		var user = req.params.user;
@@ -58,7 +70,7 @@ app.get("/reddit/u/:user", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-	app.use(express.static("public"));
+	res.redirect("https://memable.netlify.app/");
 });
 
 app.listen(port, () => {
