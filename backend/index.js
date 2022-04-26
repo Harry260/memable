@@ -5,8 +5,15 @@ import Reddit from "./lib/reddit.js";
 import cors from "cors";
 import axios from "axios";
 
+import path from "path";
+var { dirname } = path;
+import { fileURLToPath } from "url";
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 const app = express();
 const port = process.env.PORT || 4000;
+
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 app.use(
 	cors({
